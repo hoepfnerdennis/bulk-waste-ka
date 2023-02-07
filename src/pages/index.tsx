@@ -22,7 +22,7 @@ export default function Home({
             <Grid
               key={month}
               item
-              xs={4}
+              xs={6}
               sm={3}
               component={Link}
               href={`/month/${month}`}
