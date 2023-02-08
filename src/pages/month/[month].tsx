@@ -11,19 +11,25 @@ import { Box } from "@mui/system";
 export default function Month({
   streets,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const rows: GridRowsProp = streets.map(({ date, street }, id) => ({
-    id,
-    col1: date,
-    col2: street,
-  }));
+  const rows: GridRowsProp = streets.map(({ date, street }, id) => {
+    return { id, date, street };
+  });
   const columns: GridColDef[] = [
-    { field: "col1", headerName: "Datum", type: "date", width: 150 },
-    { field: "col2", headerName: "Straße", minWidth: 200 },
+    { field: "date", headerName: "Datum", type: "date", width: 150 },
+    { field: "street", headerName: "Straße", minWidth: 200 },
   ];
 
   return (
     <Box height="80vh" my={2}>
-      <DataGrid rows={rows} columns={columns} />
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        initialState={{
+          sorting: {
+            sortModel: [{ field: "date", sort: "asc" }],
+          },
+        }}
+      />
     </Box>
   );
 }
