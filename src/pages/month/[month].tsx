@@ -5,8 +5,16 @@ import {
   InferGetStaticPropsType,
 } from "next";
 import dates from "@/data/dates.json";
-import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridRowsProp,
+} from "@mui/x-data-grid";
 import { Box } from "@mui/system";
+import Link from "next/link";
+import PlaceIcon from "@mui/icons-material/Place";
+import { IconButton } from "@mui/material";
 
 export default function Month({
   streets,
@@ -15,8 +23,26 @@ export default function Month({
     return { id, date, street };
   });
   const columns: GridColDef[] = [
-    { field: "date", headerName: "Datum", type: "date", width: 150 },
-    { field: "street", headerName: "Straße", minWidth: 200 },
+    { field: "date", headerName: "Datum", type: "date", width: 100 },
+    {
+      field: "street",
+      headerName: "Straße",
+      minWidth: 200,
+      renderCell: ({ row }: GridRenderCellParams<string>) => (
+        <>
+          <IconButton
+            LinkComponent={Link}
+            href={`https://www.google.de/maps/place/${encodeURIComponent(
+              row.street
+            )},+Karlsruhe`}
+            target="_blank"
+          >
+            <PlaceIcon color="primary" />
+          </IconButton>
+          {row.street}
+        </>
+      ),
+    },
   ];
 
   return (
