@@ -22,8 +22,9 @@ export default function Home({
             <Grid
               key={month}
               item
-              xs={10}
-              sm={3}
+              xs={12}
+              sm={5}
+              md={3}
               component={Link}
               href={`/month/${month}`}
               sx={{ textDecoration: "none" }}
@@ -35,7 +36,7 @@ export default function Home({
               >
                 <CardContent>
                   <Typography variant="h5">{MONTHS[month]}</Typography>
-                  <Typography>{count}</Typography>
+                  <Typography>{count} Tage</Typography>
                 </CardContent>
               </Card>
             </Grid>
@@ -48,7 +49,11 @@ export default function Home({
 export function getStaticProps(): GetStaticPropsResult<{
   streetsByMonth: Record<string, number>;
 }> {
-  const streetsByMonth = Object.values(dates).reduce<Record<string, number>>(
+  const uniqueDates = new Set<string>();
+  Object.values(dates).forEach((date) => {
+    date && uniqueDates.add(date);
+  });
+  const streetsByMonth = Array.from(uniqueDates).reduce<Record<string, number>>(
     (prev, date) => {
       if (!date) return prev;
       const [, month] = date.split(".");
