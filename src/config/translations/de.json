@@ -6,5 +6,7 @@
   "maps.link.title": "in Google Maps öffnen",
   "appointments.count": "{{count}} Termine",
   "week.next": "Nächste Woche",
-  "last.update": "Zuletzt aktualisiert: {{lastUpdate}}"
+  "last.update": "Zuletzt aktualisiert: {{lastUpdate}}",
+  "footer.message": "Made with ❤️ in Karlruhe",
+  "footer.data.source": "Abfuhrkalender Karlsruhe"
 }

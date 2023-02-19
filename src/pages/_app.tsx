@@ -7,7 +7,7 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "@mui/material";
 import { Container } from "@mui/system";
 import theme from "@/config/theme";
-import { Header } from "@/components";
+import { Header, Footer } from "@/components";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -16,6 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Container maxWidth="md" component="main">
         <Component {...pageProps} />
       </Container>
+      <Footer />
     </ThemeProvider>
   );
 }

@@ -13,6 +13,7 @@ export default function NextWeekCard({
   return (
     <LinkNotDecorated href="/next">
       <Card
+        inverted
         title={t("week.next")}
         subtitle={`${from} - ${to}`}
         content={count ? t("appointments.count", { count }) : undefined}

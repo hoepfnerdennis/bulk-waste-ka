@@ -9,6 +9,7 @@ import {
   getNextWeekInterval,
 } from "@/actions";
 import { t } from "@/config/i18n";
+import { Box } from "@mui/system";
 
 export default function HomePage({
   streetsByMonth,

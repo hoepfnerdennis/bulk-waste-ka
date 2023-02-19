@@ -1,61 +1,37 @@
 import { DateFormat } from "@/actions";
 import { t } from "@/config/i18n";
 import { Appointment } from "@/types";
-import { Box } from "@mui/material";
-import {
-  DataGrid,
-  GridColDef,
-  GridRenderCellParams,
-  GridRowsProp,
-} from "@mui/x-data-grid";
 import { LinkToGoogleMaps } from "./maps";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { Table } from "./basic";
+
+const columns = [
+  {
+    header: t("table.header.date"),
+    renderCell: ({ date }: Appointment) => date,
+  },
+  {
+    header: t("table.header.day"),
+    center: true,
+    renderCell: ({ date }: Appointment) => DateFormat.toDayString(date),
+  },
+  {
+    header: <OpenInNewIcon />,
+    center: true,
+    renderCell: ({ street }: Appointment) => (
+      <LinkToGoogleMaps place={street} />
+    ),
+  },
+  {
+    header: t("table.header.street"),
+    renderCell: ({ street }: Appointment) => street,
+  },
+];
 
 export default function AppointmentsTable({
   appointments,
 }: {
   appointments: Appointment[];
 }) {
-  const rows: GridRowsProp = appointments.map(({ date, street }, id) => {
-    return { id, date, street };
-  });
-  const columns: GridColDef[] = [
-    {
-      field: "date",
-      headerName: t("table.header.date"),
-      type: "date",
-      width: 100,
-    },
-    {
-      field: "day",
-      headerName: t("table.header.day"),
-      renderCell: ({ row }: GridRenderCellParams<string>) =>
-        DateFormat.toDayString(row.date),
-      width: 10,
-    },
-    {
-      field: "street",
-      headerName: t("table.header.street"),
-      minWidth: 200,
-      renderCell: ({ row }: GridRenderCellParams<string>) => (
-        <Box ml={-2}>
-          <LinkToGoogleMaps place={row.street} />
-          {row.street}
-        </Box>
-      ),
-    },
-  ];
-  return (
-    // <Box height="80vh">
-    <DataGrid
-      rows={rows}
-      columns={columns}
-      autoHeight
-      initialState={{
-        sorting: {
-          sortModel: [{ field: "date", sort: "asc" }],
-        },
-      }}
-    />
-    // </Box>
-  );
+  return <Table columns={columns} rows={appointments} />;
 }

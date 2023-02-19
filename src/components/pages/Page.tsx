@@ -8,7 +8,7 @@ export default function Page({
   subtitle,
 }: PropsWithChildren<{ title: string; subtitle?: string }>) {
   return (
-    <Stack mt={1} gap={1}>
+    <Stack my={2} gap={1}>
       <Title title={title} subtitle={subtitle} />
       {children}
     </Stack>
