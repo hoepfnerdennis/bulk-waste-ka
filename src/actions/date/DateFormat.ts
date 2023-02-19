@@ -3,7 +3,7 @@ import { de } from "date-fns/locale";
 
 class DateFormat {
   private static DATE_FORMAT = "dd.MM.yyyy";
-  private static DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
+  private static DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss O";
 
   static toString(date: Date) {
     return format(date, DateFormat.DATE_FORMAT);
@@ -12,7 +12,7 @@ class DateFormat {
     return parse(date, DateFormat.DATE_FORMAT, new Date());
   }
   static toDateTimeString(date: Date) {
-    return format(date, DateFormat.DATE_TIME_FORMAT);
+    return format(date, DateFormat.DATE_TIME_FORMAT, { locale: de });
   }
   static toDayString(date: string | Date) {
     date = DateFormat.toDate(date);
