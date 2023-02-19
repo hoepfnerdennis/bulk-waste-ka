@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { GetStaticPropsResult, InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import { MonthCard, NextWeekCard } from "@/components";
@@ -13,6 +13,7 @@ import { t } from "@/config/i18n";
 export default function HomePage({
   streetsByMonth,
   nextWeek,
+  lastUpdate,
 }: InferGetServerSidePropsType<typeof getStaticProps>) {
   return (
     <>
@@ -33,6 +34,9 @@ export default function HomePage({
             </Grid>
           ))}
       </Grid>
+      <Typography variant="body2" textAlign="center" my={2}>
+        {t("last.update", { lastUpdate })}
+      </Typography>
     </>
   );
 }
@@ -44,14 +48,18 @@ export function getStaticProps(): GetStaticPropsResult<{
     from: string;
     to: string;
   };
+  lastUpdate: string;
 }> {
   const streetsByMonth = getDistinctCountPerMonth();
   const nextWeekInterval = getNextWeekInterval();
   const distinctCountNextWeek =
     getDistinctCountWithinInterval(nextWeekInterval);
+  const lastUpdate = DateFormat.toDateTimeString(new Date());
+
   return {
     revalidate: 60 * 60 * 24,
     props: {
+      lastUpdate,
       streetsByMonth,
       nextWeek: {
         count: distinctCountNextWeek,

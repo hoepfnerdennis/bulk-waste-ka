@@ -1,13 +1,18 @@
-import { DATE_FORMAT } from "@/config/constants";
 import { format, parse } from "date-fns";
 import { de } from "date-fns/locale";
 
 class DateFormat {
+  private static DATE_FORMAT = "dd.MM.yyyy";
+  private static DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
+
   static toString(date: Date) {
-    return format(date, DATE_FORMAT);
+    return format(date, DateFormat.DATE_FORMAT);
   }
   static fromString(date: string) {
-    return parse(date, DATE_FORMAT, new Date());
+    return parse(date, DateFormat.DATE_FORMAT, new Date());
+  }
+  static toDateTimeString(date: Date) {
+    return format(date, DateFormat.DATE_TIME_FORMAT);
   }
   static toDayString(date: string | Date) {
     date = DateFormat.toDate(date);

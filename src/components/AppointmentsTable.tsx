@@ -45,16 +45,17 @@ export default function AppointmentsTable({
     },
   ];
   return (
-    <Box height="80vh">
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          sorting: {
-            sortModel: [{ field: "date", sort: "asc" }],
-          },
-        }}
-      />
-    </Box>
+    // <Box height="80vh">
+    <DataGrid
+      rows={rows}
+      columns={columns}
+      autoHeight
+      initialState={{
+        sorting: {
+          sortModel: [{ field: "date", sort: "asc" }],
+        },
+      }}
+    />
+    // </Box>
   );
 }
