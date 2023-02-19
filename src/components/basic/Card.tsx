@@ -10,7 +10,7 @@ const CustomCard = styled(MuiCard)<{ inverted?: boolean }>`
   background-color: ${({ inverted, theme }) =>
     inverted && theme.palette.primary.main};
   :hover {
-    border-color: #1f8a70;
+    border-color: ${({ theme }) => theme.palette.primary.main};
   }
 `;
 
