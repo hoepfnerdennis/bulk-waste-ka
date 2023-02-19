@@ -27,7 +27,10 @@ for (let i = 0; i < streets.length; i += 2) {
 }
 
 console.log(resultMap);
-writeFileSync("./src/data/dates.json", JSON.stringify(resultMap, null, 2));
+writeFileSync(
+  "./src/data/bulkyWasteAppointments.json",
+  JSON.stringify(resultMap, null, 2)
+);
 
 async function handleStreet(street) {
   if (!street) return;
