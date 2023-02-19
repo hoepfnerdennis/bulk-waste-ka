@@ -40,7 +40,7 @@ export function getStaticProps(): GetStaticPropsResult<{
   const lastUpdate = DateFormat.toDateTimeString(new Date());
 
   return {
-    revalidate: 60, // * 60 * 24,
+    revalidate: 60 * 60 * 24,
     props: { title, subtitle, appointments, lastUpdate },
   };
 }
